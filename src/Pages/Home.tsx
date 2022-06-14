@@ -1,5 +1,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+import { Loader } from "../Components/Loader";
 import { TodosProps, UserProps } from "../Helpers/interfaces";
 import { getLocalStorage, removeLocalStorage } from "../Helpers/utils";
 import { RootState } from "../Store/reducer";
@@ -24,6 +26,7 @@ export const Home = () => {
   const [disableSubmit, setDisableSubmit] = useState<boolean>(false);
   const user: UserProps = useSelector((state: RootState) => state.User);
   const todos: TodosProps = useSelector((state: RootState) => state.Todo);
+  const auth = getLocalStorage("isLoggedIn");
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -117,7 +120,9 @@ export const Home = () => {
     setEditId("");
   };
 
-  return (
+  return !auth ? (
+    <Navigate to="/login" />
+  ) : (
     <div className="min-h-screen container text-center">
       <div className="text-end mt-5">
         <h3 className="text-xl text-blue-700">{currentUserName}</h3>
@@ -143,6 +148,7 @@ export const Home = () => {
           setTodo={setTodo}
           todo={todo}
           buttonText="Save"
+          disableSubmit={disableSubmit}
         />
       )}
       <ul className="mb-5">
@@ -156,6 +162,7 @@ export const Home = () => {
               setTodo={setTodo}
               todo={todo}
               buttonText="Update"
+              disableSubmit={disableSubmit}
             />
           ) : (
             <div className="flex justify-center my-3 ">
@@ -187,6 +194,7 @@ export const Home = () => {
           )
         )}
       </ul>
+      {(todos?.loading || user?.loading) && <Loader />}
     </div>
   );
 };

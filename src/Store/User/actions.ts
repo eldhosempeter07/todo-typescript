@@ -1,4 +1,4 @@
-import { GET_USER_LIST, GET_USER_LIST_BEGIN, GET_USER_LIST_FAIL, GET_USER_LIST_SUCCESS, REGISTER_USER, REGISTER_USER_BEGIN, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS } from "./actionTypes";
+import { GET_USER_LIST, GET_USER_LIST_BEGIN, GET_USER_LIST_FAIL, GET_USER_LIST_SUCCESS, REGISTER_USER, REGISTER_USER_BEGIN, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS, REMOVE_MESSAGE } from "./actionTypes";
 
 export const registerUser = (data:object,callback:()=>void) =>({
     type:REGISTER_USER,
@@ -35,4 +35,8 @@ export const getUserListSuccess = (data:{}) =>({
 export const getUserListFail = (error:any) =>({
     type:GET_USER_LIST_FAIL,
     payload:error
+})
+
+export const removeMessage = () =>({
+    type:REMOVE_MESSAGE
 })

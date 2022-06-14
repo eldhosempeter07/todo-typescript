@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { UserProps } from "../Helpers/interfaces";
 import { checkIfValidEmail, setLocalStorage } from "../Helpers/utils";
 import { RootState } from "../Store/reducer";
-import { getUserList } from "../Store/User/actions";
+import { getUserList, removeMessage } from "../Store/User/actions";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -23,6 +23,7 @@ export const Login = () => {
     }
     const current = user?.userList?.find((user) => user?.email == email);
     if (current) {
+      setError("");
       setLocalStorage("isLoggedIn", "true");
       setLocalStorage("email", email);
       navigate("/home");
@@ -30,8 +31,6 @@ export const Login = () => {
       return setError("Invalid Username");
     }
   };
-
-  useEffect(() => {}, [user?.userList]);
 
   useEffect(() => {
     dispatch(getUserList());
@@ -41,6 +40,14 @@ export const Login = () => {
     <div>
       <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
         <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+          {user?.success && (
+            <div
+              className="bg-green-100 rounded-lg py-2.5  text-center mb-4 text-base text-green-500"
+              role="alert"
+            >
+              {user?.success}
+            </div>
+          )}
           <h1 className="font-bold text-center text-2xl mb-5">SIGN IN</h1>
           <div className="bg-white shadow w-full rounded-lg ">
             <form onSubmit={handleSubmit} className="px-5 py-7">
@@ -62,7 +69,11 @@ export const Login = () => {
               </button>
               <p className="text-center mt-2 text-red-600">{error}</p>
               <div className="text-center">
-                <a href="/register" className="hover:underline">
+                <a
+                  href="/register"
+                  onClick={() => dispatch(removeMessage())}
+                  className="hover:underline"
+                >
                   Register
                 </a>
               </div>

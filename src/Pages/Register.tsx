@@ -12,13 +12,13 @@ const Register = () => {
   const dispatch = useDispatch();
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email == "") {
+    if (email == "" || name == "") {
       return setError("Please enter all fields");
     }
     if (!checkIfValidEmail(email)) {
       return setError("Please enter a valid email");
     }
-
+    setError("");
     dispatch(registerUser({ email, name }, () => navigate("/login")));
   };
   return (

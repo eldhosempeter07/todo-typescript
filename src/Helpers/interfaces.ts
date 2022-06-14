@@ -7,6 +7,7 @@ export type UserProps = {
       name: string;
     }[];
     error: string;
+    success?:string
   };
 
   export type TodosProps = {

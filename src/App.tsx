@@ -14,7 +14,11 @@ function App() {
         path="/"
         element={<Navigate to={auth ? "/home" : "/login"} replace />}
       />
-      <Route path="/home" element={<Home />} />
+      <Route
+        path="/home"
+        element={<Home />}
+        // element={auth ? <Home /> : <Navigate to="/login" />}
+      />
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
     </Routes>

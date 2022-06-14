@@ -1,9 +1,10 @@
-import { GET_USER_LIST_BEGIN, GET_USER_LIST_FAIL, GET_USER_LIST_SUCCESS, REGISTER_USER_BEGIN, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS } from "./actionTypes"
+import { GET_USER_LIST_BEGIN, GET_USER_LIST_FAIL, GET_USER_LIST_SUCCESS, REGISTER_USER_BEGIN, REGISTER_USER_FAIL, REGISTER_USER_SUCCESS, REMOVE_MESSAGE } from "./actionTypes"
 
 const inital_state = {
     loading:false,
     error:"",
-    userList:[]
+    userList:[],
+    success:""
 }
 
 interface UserProps  {
@@ -23,13 +24,15 @@ export const User = (state=inital_state,action:UserProps) =>{
             return{
                 ...state,
                 loading:false,
-                error:""
+                error:"",
+                success:"Registered Successfully"
             }
         case REGISTER_USER_FAIL:
             return{
                 ...state,
                 loading:false,
-                error:action.payload
+                error:action.payload,
+                success:""
             }
 
             case GET_USER_LIST_BEGIN:
@@ -51,6 +54,13 @@ export const User = (state=inital_state,action:UserProps) =>{
                     userList:[],
                     loading:false,
                     error:action.payload
+                }
+            
+            case REMOVE_MESSAGE:
+                return{
+                    ...state,
+                    success:"",
+                    error:""
                 }
                         
         default: return state

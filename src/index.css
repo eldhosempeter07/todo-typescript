@@ -15,3 +15,27 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.loader{
+  position: absolute;
+  z-index: 100;
+
+}
+
+.loaderWrapper {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: #75757580;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1040;
+
+}
+.spinnerBox {
+  text-align: center;
+  color: rgb(92, 86, 86);
+}

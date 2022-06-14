@@ -8,6 +8,7 @@ type AddNewProps = {
   handleAddNewCancel: () => void;
   completed: boolean;
   buttonText: string;
+  disableSubmit: boolean;
 };
 
 const AddNew = ({
@@ -18,6 +19,7 @@ const AddNew = ({
   handleAddNewCancel,
   completed,
   buttonText,
+  disableSubmit,
 }: AddNewProps) => {
   return (
     <div>
@@ -63,8 +65,9 @@ const AddNew = ({
         </div>
         <div className="mt-5 text-left">
           <button
-            className="bg-blue-500 px-6 py-2.5 mr-2 rounded text-white font-medium text-xs  uppercase"
+            className="bg-blue-500 px-6 py-2.5 mr-2 rounded text-white font-medium text-xs  uppercase disabled:bg-gray-400"
             type="submit"
+            disabled={disableSubmit}
           >
             {buttonText}
           </button>
