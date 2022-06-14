@@ -33,16 +33,13 @@ function* getTodos():Generator {
         yield put(getTodosSuccess(response as GetTodosProps))
     }
     } catch (error:any) {
-        // console.log(error);
         yield put(getTodosFail(error))
         
     }
 }
 
 function* getTodobyId(res:getTodo):Generator {
-    try {
-        console.log();
-        
+    try {        
         yield put(getTodobyIdBegin())
         const response = yield call(get,`/todo/${res.data.id}`)
         if(response){
@@ -55,9 +52,7 @@ function* getTodobyId(res:getTodo):Generator {
 }
 
 function* updateTodo(res:updateTodoProps):Generator {
-    try {
-        console.log(res);
-        
+    try {        
         yield put(updateTodosBegin ())
         const response = yield call(update,`/todo/${res.id}`,res.data)
         if(response){
@@ -73,7 +68,6 @@ function* updateTodo(res:updateTodoProps):Generator {
 
 function* deleteTodo(res:deleteTodoProps):Generator {
     try {
-        console.log(res);   
         yield put(deleteTodosBegin ())
         const response = yield call(del,`/todo/${res.id}`)
         if(response){

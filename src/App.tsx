@@ -6,7 +6,6 @@ import Register from "./Pages/Register";
 
 function App() {
   const auth = getLocalStorage("isLoggedIn");
-  console.log(auth);
 
   return (
     <Routes>

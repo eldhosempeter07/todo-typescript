@@ -16,7 +16,6 @@ function* registerUser(res:RegisterProps):Generator {
         res?.callback && res?.callback()
     }
     } catch (error) {
-        // console.log(error);
         yield put(registerUserFail(error))
         
     }
